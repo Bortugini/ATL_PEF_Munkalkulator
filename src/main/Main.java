@@ -23,7 +23,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
+//TODO Javadoc nötig?
     public static void main(String[] args) {
         launch(args);
     }

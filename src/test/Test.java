@@ -3,7 +3,7 @@ package test;
 import logic.*;
 
 /**
- * Test Klasse
+ * Test Klasse um die funktion der Berechnungen zu überprüfen.
  *
  * @author Thomas
  * @version 1.0
@@ -26,11 +26,12 @@ public class Test {
 
         System.out.println("Berechnung Test2 " + isEqual(cartridge1));
 
-        System.out.println(cartridge.toString());
+        System.out.println(cartridge);
     }
 
     /**
-     * Methode die überprüft, ob die Patrone korrekt berechnet wird.
+     * Diese Methode dient dazu zu überprüfen, ob die Patrone korrekt berechnet wird.
+     * Es wird true zurückgeliefert, wenn die berechnungen mit result übereinstimmt.
      *
      * @param cartridge Patronen Objekt
      * @return boolean gibt true zurück, wenn berechnung mit resultat übereinstimmt.

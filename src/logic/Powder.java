@@ -30,14 +30,14 @@ public class Powder extends AmmoPart {
      * Konstante die den Umrechnungsfaktor repräsentiert,
      * wird für die umrechnung von grs in g benötigt.<br/>
      * Quellen:<br />
-     *<a href="https://www.translatorscafe.com/unit-converter/de-DE/mass/2-46/gram-grain/">Quelle 1 </a><br/>
+     * <a href="https://www.translatorscafe.com/unit-converter/de-DE/mass/2-46/gram-grain/">Quelle 1 </a><br/>
      * <a href="https://de.wikipedia.org/wiki/Gran_(Einheit)">Quelle 2</a>
      */
     private static final double GRAIN_FACTOR = 15.4323583529;
 
 
     /**
-     * Erstellt eine neue Instanz für ein {@code Powder} Objekt.
+     * Konstruktor erstellt eine neue Instanz eines Pulvers ruft den super Konstruktor aus AmmoPart auf.
      *
      * @param name Name des Pulvers
      * @param amountPack Menge pro Packung Pulver in g
@@ -55,7 +55,7 @@ public class Powder extends AmmoPart {
     }
 
     /**
-     * Liefert die Einheit der Packung zurück.
+     * Diese Methode dient dazu die Einheit der Packung Zurückzuliefern.
      *
      * @return {@code String} mit der einheit
      */
@@ -64,7 +64,7 @@ public class Powder extends AmmoPart {
     }
 
     /**
-     * Liefert die Einheit der verladenen Menge zurück.
+     * Diese Methode dient dazu die Einheit der verladenen Menge Zurückzuliefern.
      *
      * @return {@code String} mit der Einheit
      */
@@ -73,7 +73,7 @@ public class Powder extends AmmoPart {
     }
 
     /**
-     * Liefert die verladene Menge Pulver zurück in grs.
+     * Diese Methode dient dazu die verladene Menge Pulver Zurückzuliefern in grs.
      *
      * @return {@code double} Verladene Menge Pulver
      */
@@ -94,7 +94,7 @@ public class Powder extends AmmoPart {
     }
 
     /**
-     * Mit dieser Methode wird berechnet was ein grs Pulver kostet.
+     * Diese Methode dient dazu zu Berechnen, was ein grs Pulver kostet.
      * Ausserdem rechnet die Methode die Einheiten von Gramm in grain
      * bei der verladenen Menge Pulver und Kilogramm in Gramm bei der Menge pro Packung um.
      * Dies ist wichtig, weil sonst die Formel für die Berechnung des Preises pro Packung nicht stimmen würde.

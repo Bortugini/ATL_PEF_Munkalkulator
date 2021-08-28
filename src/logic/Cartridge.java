@@ -37,7 +37,7 @@ public class Cartridge {
     private final String nameCartridge;
 
     /**
-     * Erstellt eine neue Instanz für eine Patrone.
+     * Konstruktor erstellt eine neue Instanz für eine Patrone.
      *
      * @param bullet Bullet Objekt
      * @param aCase Case Objekt
@@ -59,7 +59,7 @@ public class Cartridge {
     }
 
     /**
-     * Liefert den Namen der Patrone.
+     * Diese Methode dient dazu den Namen der Patrone Zurückzuliefern.
      *
      * @return {@code String} Name
      */
@@ -68,7 +68,7 @@ public class Cartridge {
     }
 
     /**
-     * Liefert das {@code Bullet} Objekt zurück.
+     * Diese Methode dient dazu das {@code Bullet} Objekt Zurückzuliefern.
      *
      * @return {@code Bullet} Objekt
      * @see Bullet
@@ -78,7 +78,7 @@ public class Cartridge {
     }
 
     /**
-     * Liefert das {@code Case} Objekt zurück.
+     * Diese Methode dient dazu das {@code Case} Objekt Zurückzuliefern.
      *
      * @return {@code Case} Objekt
      */
@@ -87,7 +87,7 @@ public class Cartridge {
     }
 
     /**
-     * Liefert das {@code Powder} Objekt zurück.
+     * Diese Methode dient dazu das {@code Powder} Objekt Zurückzuliefern.
      *
      * @return {@code Powder} Objekt
      */
@@ -96,7 +96,7 @@ public class Cartridge {
     }
 
     /**
-     * Liefert das {@code Primer} Objekt zurück.
+     * Diese Methode dient dazu das {@code Primer} Objekt Zurückzuliefern.
      *
      * @return {@code Primer} Objekt
      */
@@ -105,7 +105,7 @@ public class Cartridge {
     }
 
     /**
-     * Berechnet den Preis für die Anzahl Patronen und liefert diesen zurück.
+     * Diese Methode dient dazu den Preis für die Anzahl Patronen zu berechnen und liefert diesen zurück.
      *
      * @param quantity Anzahl Patronen
      * @return {@code double} Preis für anzahl Patronen
@@ -117,7 +117,7 @@ public class Cartridge {
     }
 
     /**
-     * Liefert eine {@code String} Representation des Objektes zurück.
+     * Diese Methode dient dazu eine {@code String} Representation des Objektes Zurückliefern.
      *
      * @return {@code String} Representation des Objektes
      */

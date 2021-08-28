@@ -27,66 +27,67 @@ import java.util.ResourceBundle;
  */
 public class MainController implements Initializable {
     @FXML
-    private Button btnSpeichern;
+    private Button btnSave;
     @FXML
     private TextField tfName;
     //**********Zünder************
     @FXML
-    private TextField tfNameZünder, tfPreisZünder, tfMengeZünder;
+    private TextField tfNamePrimer, tfPricePrimer, tfAmountPrimer;
     //**********Hülse************
     @FXML
-    private TextField tfNameHülse, tfPreisHülse, tfMengeHülse;
+    private TextField tfNameCase, tfPriceCase, tfAmountCase;
     //**********Pulver************
     @FXML
-    private TextField tfNamePulver, tfPreisPulver, tfMengePulver, tfMengeVerladenPulver;
+    private TextField tfNamePowder, tfPricePowder, tfAmountPowder, tfAmountLoaded;
     //**********Geschoss************
     @FXML
-    private TextField tfNameGeschoss, tfPreisGeschoss, tfMengeGeschoss;
+    private TextField tfNameBullet, tfPriceBullet, tfAmountBullet;
     //**********Output************
     @FXML
     private Label lbOut1, lbOut2, lbOut3;
     //**********ChoiceBox************
     @FXML
-    private ChoiceBox<String> cbEinheitPackung;
+    private ChoiceBox<String> cbUnitPack;
     @FXML
-    private ChoiceBox<String> cbEinheitVerladeneMenge;
+    private ChoiceBox<String> cbUnitAmountLoaded;
     //**********Spinner************
     @FXML
     private Spinner sp1, sp2, sp3;
     //**********Tab************
     @FXML
-    private Tab tabRechner, tabBerechnungen;
+    private Tab tabCalc, tabCalculations;
     //**********TableView************
     @FXML
     private TableView<Cartridge> tblView;
     @FXML
-    private TableColumn<Cartridge, String> tblGeschoss;
+    private TableColumn<Cartridge, String> tblBullet;
     @FXML
-    private TableColumn<Cartridge, String> tblPulver;
+    private TableColumn<Cartridge, String> tblPowder;
     @FXML
-    private TableColumn<Cartridge, String> tblHülse;
+    private TableColumn<Cartridge, String> tblCase;
     @FXML
-    private TableColumn<Cartridge, String> tblZünder;
+    private TableColumn<Cartridge, String> tblPrimer;
     @FXML
-    private TableColumn<Cartridge, String> tblMunition;
+    private TableColumn<Cartridge, String> tblAmmo;
     @FXML
-    private TableColumn<Cartridge, String> tblKosten;
+    private TableColumn<Cartridge, String> tblCosts;
     //**********ContextMenu************
     @FXML
-    private MenuItem conMenuLaden;
+    private MenuItem conMenuLoading;
 
     private final AmmoFile ammoFile = Singleton.getInstance(Storage.MEMORY).getDAO();
-    private final ObservableList<Cartridge> patronen = FXCollections.observableArrayList();
+    private final ObservableList<Cartridge> cartridges = FXCollections.observableArrayList();
     private final DecimalFormat pattern = new DecimalFormat("#0.00");
     private Cartridge cartridge;
 
+    //TODO Param url, resourceBundle nötig?
     /**
      * Initialize methode wird beim aufruf des controllers automatisch ausgeführt.
+     * Und dient dazu alle Choice Boxen, Spinner und Buttons zu initialisieren.
      *
      * @param url
      * @param resourceBundle
      */
-    //TODO parameter Beschrieben
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initChoiceBoxes();
@@ -100,23 +101,22 @@ public class MainController implements Initializable {
      * Wenn alle felder ausgefüllt sind, wird der Berechnen-Button freigeschaltet.
      */
     public void initButton() {
-        btnSpeichern.setDisable(isNull());
+        btnSave.setDisable(isNull());
     }
 
-    //TODO Javadoc schreiben
-
     /**
-     *
+     * Berechnet die Kosten für die Anzahl Patronen, die in den Spinnern eingestellt sind.
+     * Wird bei jeder änderung neu ausgeführt.
      */
     @FXML
-    public void berechnen() {
+    public void calc() {
         if (!isNull()) {
-            Powder powder = new Powder(tfNamePulver.getText(), Integer.parseInt(tfMengePulver.getText()), Double.parseDouble(tfPreisPulver.getText())
-                    , Double.parseDouble(tfMengeVerladenPulver.getText()), cbEinheitPackung.getValue(), cbEinheitVerladeneMenge.getValue());
-            Case aCase = new Case(tfNameHülse.getText(), Integer.parseInt(tfMengeHülse.getText()), Double.parseDouble(tfPreisHülse.getText()));
-            Bullet bullet = new Bullet(tfNameGeschoss.getText(), Integer.parseInt(tfMengeGeschoss.getText()), Double.parseDouble(tfPreisGeschoss.getText()));
-            Primer primer = new Primer(tfNameZünder.getText(), Integer.parseInt(tfMengeZünder.getText()), Double.parseDouble(tfPreisZünder.getText()));
-            cartridge = new Cartridge(bullet, aCase, powder, primer, tfName.getText());
+            Powder powder = new Powder(tfNamePowder.getText(), Integer.parseInt(tfAmountPowder.getText()), Double.parseDouble(tfPricePowder.getText())
+                    , Double.parseDouble(tfAmountLoaded.getText()), cbUnitPack.getValue(), cbUnitAmountLoaded.getValue());
+            Case aCase = new Case(tfNameCase.getText(), Integer.parseInt(tfAmountCase.getText()), Double.parseDouble(tfPriceCase.getText()));
+            Bullet aBullet = new Bullet(tfNameBullet.getText(), Integer.parseInt(tfAmountBullet.getText()), Double.parseDouble(tfPriceBullet.getText()));
+            Primer aPrimer = new Primer(tfNamePrimer.getText(), Integer.parseInt(tfAmountPrimer.getText()), Double.parseDouble(tfPricePrimer.getText()));
+            cartridge = new Cartridge(aBullet, aCase, powder, aPrimer, tfName.getText());
 
             Spinner[] spinners = {sp1, sp2, sp3};
             Label[] labels = {lbOut1, lbOut2, lbOut3};
@@ -127,17 +127,22 @@ public class MainController implements Initializable {
 
         }
     }
-//TODO Javadoc schreiben
 
+//TODO param event Nötig?
     /**
+     * Diese Methode dient dazu die berechnete Patrone zu Speichern.
+     *
      * @param event
      */
     public void save(ActionEvent event) {
         ammoFile.addCartridge(cartridge);
     }
-//TODO Javadoc schreiben
 
+//TODO param event Nötig?
     /**
+     * Diese Methode dient dazu die gespeicherten Konfigurationen zu laden.
+     * Es wird die ausgewälte konfiguration aus dem Berechnungen-Tab geladen und im Rechner Tab angezeigt.
+     *
      * @param event
      */
     public void load(ActionEvent event) {
@@ -145,98 +150,112 @@ public class MainController implements Initializable {
         Cartridge cartridge = ammoFile.getCartridge(index);
 
         tfName.setText(cartridge.getNameCartridge());
-        tfNameHülse.setText(cartridge.getCase().getName());
-        tfNamePulver.setText(cartridge.getPowder().getName());
-        tfNameZünder.setText(cartridge.getPrimer().getName());
-        tfNameGeschoss.setText(cartridge.getBullet().getName());
+        tfNameCase.setText(cartridge.getCase().getName());
+        tfNamePowder.setText(cartridge.getPowder().getName());
+        tfNamePrimer.setText(cartridge.getPrimer().getName());
+        tfNameBullet.setText(cartridge.getBullet().getName());
 
-        tfMengeZünder.setText(Integer.toString(cartridge.getPrimer().getAmountPack()));
-        tfMengePulver.setText(Integer.toString(cartridge.getPowder().getAmountPack()));
-        tfMengeGeschoss.setText(Integer.toString(cartridge.getBullet().getAmountPack()));
-        tfMengeHülse.setText(Integer.toString(cartridge.getCase().getAmountPack()));
+        tfAmountPrimer.setText(Integer.toString(cartridge.getPrimer().getAmountPack()));
+        tfAmountPowder.setText(Integer.toString(cartridge.getPowder().getAmountPack()));
+        tfAmountBullet.setText(Integer.toString(cartridge.getBullet().getAmountPack()));
+        tfAmountCase.setText(Integer.toString(cartridge.getCase().getAmountPack()));
 
-        tfPreisHülse.setText(Double.toString(cartridge.getCase().getPricePack()));
-        tfPreisZünder.setText(Double.toString(cartridge.getPrimer().getPricePack()));
-        tfPreisPulver.setText(Double.toString(cartridge.getPowder().getPricePack()));
-        tfPreisGeschoss.setText(Double.toString(cartridge.getBullet().getPricePack()));
-        tfMengeVerladenPulver.setText(Double.toString(cartridge.getPowder().getAmountLoaded()));
+        tfPriceCase.setText(Double.toString(cartridge.getCase().getPricePack()));
+        tfPricePrimer.setText(Double.toString(cartridge.getPrimer().getPricePack()));
+        tfPricePowder.setText(Double.toString(cartridge.getPowder().getPricePack()));
+        tfPriceBullet.setText(Double.toString(cartridge.getBullet().getPricePack()));
+        tfAmountLoaded.setText(Double.toString(cartridge.getPowder().getAmountLoaded()));
 
-        cbEinheitPackung.setValue(cartridge.getPowder().getUnitPack());
-        cbEinheitVerladeneMenge.setValue(cartridge.getPowder().getUnitAmountLoaded());
+        cbUnitPack.setValue(cartridge.getPowder().getUnitPack());
+        cbUnitAmountLoaded.setValue(cartridge.getPowder().getUnitAmountLoaded());
     }
 
-    //TODO Javadoc Schreiben
-
     /**
-     *
+     * Diese Methode wird bei jedem tab Wechsel ausgeführt und dient dazu immer die
+     * Aktuellen Berechnungen im tab berechnungen anzuzeigen.
+     * Wenn das tab Berechnungen ausgewählt ist, werden alle berechnungen die gespeichert wurden
+     * der ObservableList cartridges zugewiesen und in der Liste angezeigt.
+     * Wenn dann wider zurück zum tab Recher gewechselt wird wird die ObservableList cartridges geleert
+     * damit die einträge nicht doppelt sind.
      */
     public void onTabView() {
-        if (tabBerechnungen.isSelected()) {
-            patronen.addAll(ammoFile.getCartridges());
+        if (tabCalculations.isSelected()) {
+            cartridges.addAll(ammoFile.getCartridges());
         } else {
-            patronen.removeAll(ammoFile.getCartridges());
+            cartridges.removeAll(ammoFile.getCartridges());
         }
-        tblView.setItems(patronen);
-        tblPulver.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPowder().getName()));
-        tblGeschoss.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getBullet().getName()));
-        tblHülse.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCase().getName()));
-        tblMunition.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNameCartridge()));
-        tblZünder.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPrimer().getName()));
-        tblKosten.setCellValueFactory(data -> new SimpleStringProperty(String.format(pattern.format(data.getValue().calc(1)) + " Sfr.")));
-        conMenuLaden.setDisable(tblView.getItems().isEmpty());
+        tblView.setItems(cartridges);
+        tblPowder.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPowder().getName()));
+        tblBullet.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getBullet().getName()));
+        tblCase.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCase().getName()));
+        tblAmmo.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNameCartridge()));
+        tblPrimer.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPrimer().getName()));
+        tblCosts.setCellValueFactory(data -> new SimpleStringProperty(String.format(pattern.format(data.getValue().calc(1)) + " Sfr.")));
+        conMenuLoading.setDisable(tblView.getItems().isEmpty());
     }
-    //TODO Javadoc schreiben
 
+//TODO param event Nötig?
     /**
+     * Diese Methode dient dazu bei den Textfeldern nur int zuzulassen.
+     * In dieser Methode wird nur der REGEX Filter für die Methode validation gesetzt.
+     *
      * @param event Key Event Objekt
+     * @see MainController#validation(KeyEvent, String)
      */
-    //https://www.it-swarm.com.de/de/input/was-ist-der-empfohlene-weg-um-ein-numerisches-textfield-javafx-zu-erstellen/940163968/
     @FXML
     public void isInt(KeyEvent event) {
         /*
-         * \\d = 0 - 9 * = 0 - mehr
+         * \\d = 0 - 9
+         * * = 0 - mehr
          */
-        validierung(event, "\\d*");
+        validation(event, "\\d*");
     }
-    //TODO Javadoc schreiben
 
+//TODO param event Nötig?
     /**
+     * Diese Methode dient dazu bei den Textfeldern nur Double zuzulassen.
+     * In dieser Methode wird nur der REGEX Filter für die Methode validation gesetzt.
+     *
      * @param event Key Event Objekt
+     * @see MainController#validation(KeyEvent, String)
      */
     @FXML
     public void isDouble(KeyEvent event) {
         /*
-         * [\\d]= 0 - 9 * = 0 - mehr
-         * [\\.] = . ? = 0 - 1
-         * [\\d] = 0 - 9 * = 0 - mehr
+         * [\\d]= 0 - 9
+         * * = 0 - mehr
+         * [\\.] = .
+         * ? = 0 - 1
+         * [\\d] = 0 - 9
+         * * = 0 - mehr
          */
-        validierung(event, "[\\d]*[\\.]?[\\d]*");
+        validation(event, "[\\d]*[\\.]?[\\d]*");
     }
 
     /**
-     * Initialisiert alle ChoiceBoxen.
+     * Diese Methode Initialisiert alle ChoiceBoxen.
      */
     private void initChoiceBoxes() {
-        cbEinheitPackung.getItems().addAll("kg", "g");
-        cbEinheitPackung.setValue("kg");
-        cbEinheitPackung.valueProperty().addListener(new ChangeListener<String>() {
+        cbUnitPack.getItems().addAll("kg", "g");
+        cbUnitPack.setValue("kg");
+        cbUnitPack.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-                berechnen();
+                calc();
             }
         });
-        cbEinheitVerladeneMenge.getItems().addAll("grs", "g");
-        cbEinheitVerladeneMenge.setValue("grs");
-        cbEinheitVerladeneMenge.valueProperty().addListener(new ChangeListener<String>() {
+        cbUnitAmountLoaded.getItems().addAll("grs", "g");
+        cbUnitAmountLoaded.setValue("grs");
+        cbUnitAmountLoaded.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-                berechnen();
+                calc();
             }
         });
     }
 
     /**
-     * Initialisiert alle Spinner
+     * Diese Methode initialisiert alle Spinner.
      */
     private void initSpinners() {
         Spinner[] spinners = {sp1, sp2, sp3};
@@ -248,34 +267,39 @@ public class MainController implements Initializable {
             spinners[i].valueProperty().addListener(new ChangeListener() {
                 @Override
                 public void changed(ObservableValue observableValue, Object o, Object t1) {
-                    berechnen();
+                    calc();
                 }
             });
         }
     }
-//TODO Javadoc schreiben
 
     /**
-     * @return
+     * Diese Methode dient dazu zu überprüfen ob alle Textfelder ausgefüllt wurden.
+     * Wenn alle Textfelder ausgefüllt wurden wird {@code true} Zurückgeliefert.
+     *
+     * @return {@code true} wenn alle Textfelder Ausgefüllt
      */
     private boolean isNull() {
-        return tfMengeGeschoss.getText().equals("") || tfMengeHülse.getText().equals("")
-                || tfMengePulver.getText().equals("") || tfMengeVerladenPulver.getText().equals("")
-                || tfNameGeschoss.getText().equals("") || tfMengeZünder.getText().equals("")
-                || tfNameHülse.getText().equals("") || tfName.getText().equals("")
-                || tfNamePulver.getText().equals("") || tfPreisPulver.getText().equals("")
-                || tfNameZünder.getText().equals("") || tfPreisGeschoss.getText().equals("")
-                || tfPreisZünder.getText().equals("") || tfPreisHülse.getText().equals("");
+        return tfAmountBullet.getText().equals("") || tfAmountCase.getText().equals("")
+                || tfAmountPowder.getText().equals("") || tfAmountLoaded.getText().equals("")
+                || tfNameBullet.getText().equals("") || tfAmountPrimer.getText().equals("")
+                || tfNameCase.getText().equals("") || tfName.getText().equals("")
+                || tfNamePowder.getText().equals("") || tfPricePowder.getText().equals("")
+                || tfNamePrimer.getText().equals("") || tfPriceBullet.getText().equals("")
+                || tfPricePrimer.getText().equals("") || tfPriceCase.getText().equals("");
     }
 
+//TODO param event Nötig?
     /**
-     * Methode um bei Textfeldern die eingabe zu Beschränken.
-     * Überprüft mittels filter und bei bestimmten Feldern das keine 0 verwendet werden kann (Division durch 0).
+     * Diese Methode dient dazu um bei Textfeldern die eingabe zu Beschränken.
+     * Überprüft mittels übergebenem REGEX filter.
+     * Und bei bestimmten Feldern das keine 0 verwendet werden kann (Division durch 0).
      *
      * @param event  Key Event Objekt
      * @param filter Filter für die überprüfung REGEX
      */
-    private void validierung(KeyEvent event, String filter) {
+    //https://www.it-swarm.com.de/de/input/was-ist-der-empfohlene-weg-um-ein-numerisches-textfield-javafx-zu-erstellen/940163968/
+    private void validation(KeyEvent event, String filter) {
         TextField tf = (TextField) event.getSource();
         ChangeListener<String> listener = (observable, oldValue, newValue) -> {
             if (!newValue.matches(filter)) {

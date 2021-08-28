@@ -29,7 +29,7 @@ public class AmmoFile {
     }
 
     /**
-     * Liefert eine {@code ArrayList} mit {@code Cartridges} zurück,
+     * Diese Methode dient dazu eine {@code ArrayList} mit {@code Cartridges} zurück zu liefern,
      * aus Implementierungen vom Interface {@code AmmoDAO}.
      *
      * @return {@code ArrayList<Cartridge>} Patronen
@@ -42,8 +42,8 @@ public class AmmoFile {
     }
 
     /**
-     * Liefert eine {@code Cartridge} die aufgrund des indexes in
-     * der {@code ArrayList} ausgewählt wurde zurück.
+     * Diese Methode dient dazu eine {@code Cartridge} die aufgrund des indexes in
+     * der {@code ArrayList} ausgewählt wurde zurück zu liefern.
      *
      * @param index Stelle im ArrayList des benötigten Objektes
      * @return {@code Cartridge} Patrone
@@ -53,10 +53,11 @@ public class AmmoFile {
     }
 
     /**
-     * Ruft die save Methode aus Implementierungen vom Interface DateiDAO auf.
-     * Um Patronen hinzuzufügen.
+     * Diese Methode dient dazu die save Methode aus Implementierungen vom Interface DateiDAO auf zu rufen,
+     * um Patronen hinzuzufügen.
      *
      * @param cartridge Patronen Objekt
+     *
      * @see AmmoDAO#save(Cartridge)
      * @see Cartridge
      */
@@ -65,7 +66,7 @@ public class AmmoFile {
     }
 
     /**
-     * Diese methode erstellt den gewählten Speicher Konstruktor.
+     * Diese Methode dient dazu den gewählten Speicher Konstruktor zu erstellen.
      * Aufgrund des Parameters {@code storage} im Konstruktor.
      *
      * @param storage Gewählte Speicher Methode aus enum {@code Storage}

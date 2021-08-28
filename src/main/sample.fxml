@@ -42,13 +42,13 @@
         </MenuBar>
         <TabPane prefHeight="308.0" prefWidth="1012.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab fx:id="tabRechner" text="Rechner">
+                <Tab fx:id="tabCalc" text="Rechner">
                     <content>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="319.0" prefWidth="920.0">
                             <right>
                                 <AnchorPane prefHeight="293.0" prefWidth="203.0" BorderPane.alignment="CENTER">
                                     <children>
-                                        <Button fx:id="btnSpeichern" disable="true" layoutX="10.0" layoutY="231.0" mnemonicParsing="false" onAction="#save" prefHeight="26.0" prefWidth="176.0" text="Speichern" />
+                                        <Button fx:id="btnSave" disable="true" layoutX="10.0" layoutY="231.0" mnemonicParsing="false" onAction="#save" prefHeight="26.0" prefWidth="176.0" text="Speichern" />
                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="147.0" text="Berechnungen" textAlignment="CENTER" />
                                         <Label fx:id="lbOut1" alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="100.0" prefHeight="26.0" prefWidth="106.0" style="-fx-background-color: lightgrey;" textAlignment="CENTER">
                                             <opaqueInsets>
@@ -70,22 +70,22 @@
                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="181.0" layoutY="64.0" prefHeight="26.0" prefWidth="147.0" text="Hülse" textAlignment="CENTER" />
                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="346.0" layoutY="64.0" prefHeight="26.0" prefWidth="147.0" text="Pulver" textAlignment="CENTER" />
                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="512.0" layoutY="64.0" prefHeight="26.0" prefWidth="147.0" text="Geschoss" textAlignment="CENTER" />
-                                        <TextField fx:id="tfName" alignment="CENTER" layoutX="181.0" layoutY="14.0" onKeyReleased="#initButton" onKeyTyped="#berechnen" prefHeight="26.0" prefWidth="319.0" promptText="Name" />
-                                        <TextField fx:id="tfNameZünder" alignment="CENTER" layoutX="14.0" layoutY="102.0" onKeyReleased="#initButton" onKeyTyped="#berechnen" prefHeight="14.0" prefWidth="150.0" promptText="Name" />
-                                        <TextField fx:id="tfNameHülse" alignment="CENTER" layoutX="180.0" layoutY="102.0" onKeyReleased="#initButton" onKeyTyped="#berechnen" promptText="Name" />
-                                        <TextField fx:id="tfNamePulver" alignment="CENTER" layoutX="345.0" layoutY="102.0" onKeyReleased="#initButton" onKeyTyped="#berechnen" promptText="Name" />
-                                        <TextField fx:id="tfNameGeschoss" alignment="CENTER" layoutX="511.0" layoutY="102.0" onKeyReleased="#initButton" onKeyTyped="#berechnen" promptText="Name" />
-                                        <TextField fx:id="tfPreisZünder" alignment="CENTER" layoutX="14.0" layoutY="143.0" onKeyPressed="#isDouble" onKeyReleased="#initButton" onKeyTyped="#berechnen" prefHeight="14.0" prefWidth="150.0" promptText="Preis" />
-                                        <TextField fx:id="tfPreisHülse" alignment="CENTER" layoutX="179.0" layoutY="143.0" onKeyPressed="#isDouble" onKeyReleased="#initButton" onKeyTyped="#berechnen" prefHeight="14.0" prefWidth="150.0" promptText="Preis" />
-                                        <TextField fx:id="tfPreisPulver" alignment="CENTER" layoutX="344.0" layoutY="143.0" onKeyPressed="#isDouble" onKeyReleased="#initButton" onKeyTyped="#berechnen" prefHeight="14.0" prefWidth="150.0" promptText="Preis" />
-                                        <TextField fx:id="tfPreisGeschoss" alignment="CENTER" layoutX="510.0" layoutY="143.0" onKeyPressed="#isDouble" onKeyReleased="#initButton" onKeyTyped="#berechnen" prefHeight="14.0" prefWidth="150.0" promptText="Preis" />
-                                        <TextField fx:id="tfMengeZünder" alignment="CENTER" layoutX="14.0" layoutY="187.0" onKeyPressed="#isInt" onKeyReleased="#initButton" onKeyTyped="#berechnen" prefHeight="14.0" prefWidth="150.0" promptText="Mänge Packung" />
-                                        <TextField fx:id="tfMengeHülse" alignment="CENTER" layoutX="179.0" layoutY="187.0" onKeyPressed="#isInt" onKeyReleased="#initButton" onKeyTyped="#berechnen" prefHeight="14.0" prefWidth="150.0" promptText="Mänge Packung" />
-                                        <TextField fx:id="tfMengePulver" alignment="CENTER" layoutX="344.0" layoutY="187.0" onKeyPressed="#isInt" onKeyReleased="#initButton" onKeyTyped="#berechnen" prefHeight="26.0" prefWidth="104.0" promptText="Mänge Packung" />
-                                        <ChoiceBox fx:id="cbEinheitPackung" layoutX="448.0" layoutY="187.0" prefHeight="26.0" prefWidth="45.0" />
-                                        <TextField fx:id="tfMengeGeschoss" alignment="CENTER" layoutX="510.0" layoutY="187.0" onKeyPressed="#isInt" onKeyReleased="#initButton" onKeyTyped="#berechnen" prefHeight="14.0" prefWidth="150.0" promptText="Mänge Packung" />
-                                        <TextField fx:id="tfMengeVerladenPulver" alignment="CENTER" layoutX="344.0" layoutY="225.0" onKeyPressed="#isDouble" onKeyReleased="#initButton" onKeyTyped="#berechnen" prefHeight="26.0" prefWidth="106.0" promptText="Verladene Mänge" />
-                                        <ChoiceBox fx:id="cbEinheitVerladeneMenge" layoutX="448.0" layoutY="225.0" prefHeight="26.0" prefWidth="45.0" />
+                                        <TextField fx:id="tfName" alignment="CENTER" layoutX="181.0" layoutY="14.0" onKeyReleased="#initButton" onKeyTyped="#calc" prefHeight="26.0" prefWidth="319.0" promptText="Name" />
+                                        <TextField fx:id="tfNamePrimer" alignment="CENTER" layoutX="14.0" layoutY="102.0" onKeyReleased="#initButton" onKeyTyped="#calc" prefHeight="14.0" prefWidth="150.0" promptText="Name" />
+                                        <TextField fx:id="tfNameCase" alignment="CENTER" layoutX="180.0" layoutY="102.0" onKeyReleased="#initButton" onKeyTyped="#calc" promptText="Name" />
+                                        <TextField fx:id="tfNamePowder" alignment="CENTER" layoutX="345.0" layoutY="102.0" onKeyReleased="#initButton" onKeyTyped="#calc" promptText="Name" />
+                                        <TextField fx:id="tfNameBullet" alignment="CENTER" layoutX="511.0" layoutY="102.0" onKeyReleased="#initButton" onKeyTyped="#calc" promptText="Name" />
+                                        <TextField fx:id="tfPricePrimer" alignment="CENTER" layoutX="14.0" layoutY="143.0" onKeyPressed="#isDouble" onKeyReleased="#initButton" onKeyTyped="#calc" prefHeight="14.0" prefWidth="150.0" promptText="Preis" />
+                                        <TextField fx:id="tfPriceCase" alignment="CENTER" layoutX="179.0" layoutY="143.0" onKeyPressed="#isDouble" onKeyReleased="#initButton" onKeyTyped="#calc" prefHeight="14.0" prefWidth="150.0" promptText="Preis" />
+                                        <TextField fx:id="tfPricePowder" alignment="CENTER" layoutX="344.0" layoutY="143.0" onKeyPressed="#isDouble" onKeyReleased="#initButton" onKeyTyped="#calc" prefHeight="14.0" prefWidth="150.0" promptText="Preis" />
+                                        <TextField fx:id="tfPriceBullet" alignment="CENTER" layoutX="510.0" layoutY="143.0" onKeyPressed="#isDouble" onKeyReleased="#initButton" onKeyTyped="#calc" prefHeight="14.0" prefWidth="150.0" promptText="Preis" />
+                                        <TextField fx:id="tfAmountPrimer" alignment="CENTER" layoutX="14.0" layoutY="187.0" onKeyPressed="#isInt" onKeyReleased="#initButton" onKeyTyped="#calc" prefHeight="14.0" prefWidth="150.0" promptText="Mänge Packung" />
+                                        <TextField fx:id="tfAmountCase" alignment="CENTER" layoutX="179.0" layoutY="187.0" onKeyPressed="#isInt" onKeyReleased="#initButton" onKeyTyped="#calc" prefHeight="14.0" prefWidth="150.0" promptText="Mänge Packung" />
+                                        <TextField fx:id="tfAmountPowder" alignment="CENTER" layoutX="344.0" layoutY="187.0" onKeyPressed="#isInt" onKeyReleased="#initButton" onKeyTyped="#calc" prefHeight="26.0" prefWidth="104.0" promptText="Mänge Packung" />
+                                        <ChoiceBox fx:id="cbUnitPack" layoutX="448.0" layoutY="187.0" prefHeight="26.0" prefWidth="45.0" />
+                                        <TextField fx:id="tfAmountBullet" alignment="CENTER" layoutX="510.0" layoutY="187.0" onKeyPressed="#isInt" onKeyReleased="#initButton" onKeyTyped="#calc" prefHeight="14.0" prefWidth="150.0" promptText="Mänge Packung" />
+                                        <TextField fx:id="tfAmountLoaded" alignment="CENTER" layoutX="344.0" layoutY="225.0" onKeyPressed="#isDouble" onKeyReleased="#initButton" onKeyTyped="#calc" prefHeight="26.0" prefWidth="106.0" promptText="Verladene Mänge" />
+                                        <ChoiceBox fx:id="cbUnitAmountLoaded" layoutX="448.0" layoutY="225.0" prefHeight="26.0" prefWidth="45.0" />
                                         <Separator layoutX="688.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="375.0" prefWidth="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     </children>
                                 </AnchorPane>
@@ -93,21 +93,21 @@
                         </BorderPane>
                     </content>
                 </Tab>
-                <Tab fx:id="tabBerechnungen" onSelectionChanged="#onTabView" text="Berechnungen">
+                <Tab fx:id="tabCalculations" onSelectionChanged="#onTabView" text="Berechnungen">
                     <content>
                         <TableView fx:id="tblView" prefHeight="200.0" prefWidth="200.0">
                             <columns>
-                                <TableColumn fx:id="tblMunition" prefWidth="140.0" text="Munition" />
-                                <TableColumn fx:id="tblGeschoss" prefWidth="140.0" text="Geschoss" />
-                                <TableColumn fx:id="tblPulver" prefWidth="140.0" text="Pulver" />
-                                <TableColumn fx:id="tblHülse" prefWidth="140.0" text="Hülse" />
-                                <TableColumn fx:id="tblZünder" prefWidth="140.0" text="Zündhütchen" />
-                                <TableColumn fx:id="tblKosten" prefWidth="140.0" text="Kosten Stk." />
+                                <TableColumn fx:id="tblAmmo" prefWidth="140.0" text="Munition" />
+                                <TableColumn fx:id="tblBullet" prefWidth="140.0" text="Geschoss" />
+                                <TableColumn fx:id="tblPowder" prefWidth="140.0" text="Pulver" />
+                                <TableColumn fx:id="tblCase" prefWidth="140.0" text="Hülse" />
+                                <TableColumn fx:id="tblPrimer" prefWidth="140.0" text="Zündhütchen" />
+                                <TableColumn fx:id="tblCosts" prefWidth="140.0" text="Kosten Stk." />
                             </columns>
                      <contextMenu>
                         <ContextMenu>
                           <items>
-                            <MenuItem fx:id="conMenuLaden" mnemonicParsing="false" text="Laden" onAction="#load" />
+                            <MenuItem fx:id="conMenuLoading" mnemonicParsing="false" text="Laden" onAction="#load" />
                           </items>
                         </ContextMenu>
                      </contextMenu>

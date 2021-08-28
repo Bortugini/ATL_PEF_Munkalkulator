@@ -1,11 +1,20 @@
 package data;
-//TODO Javadoc schreiben
+
 /**
+ * Singleton Klasse um den zugriff auf die daten von überall her zu gewährleisten.
  *
+ * @author Thomas Saner
+ * @version 1.0
  */
 public class Singleton {
 
+    /**
+     * Singleton Instanz Variable
+     */
     private static Singleton instance;
+    /**
+     * AmmoFile Instanz Variable
+     */
     private static AmmoFile dao;
 
     /**
@@ -16,7 +25,8 @@ public class Singleton {
     }
 
     /**
-     * Liefert das Singleton Objekt zurück, wenn noch keins vorhanden ist, wird eines erstellt maximale anzahl ist eins.
+     * Diese Methode dient dazu das Singleton Objekt zurück zu liefern, wenn noch keins vorhanden ist,
+     * wird eines erstellt die maximale anzahl ist eins.
      *
      * @param storage Konstante aus enum {@code Storage}
      * @return Singleton Objekt
@@ -33,9 +43,10 @@ public class Singleton {
     }
 
     /**
-     * Liefert das DAO Objekt zurück.
+     * Diese Methode dient dazu das DAO Objekt zurück zu liefern.
      *
-     * @return MunDatei
+     * @return AmmoFile
+     *
      * @see AmmoFile
      */
     public AmmoFile getDAO() {
