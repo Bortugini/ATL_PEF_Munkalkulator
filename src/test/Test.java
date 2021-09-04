@@ -5,7 +5,7 @@ import logic.*;
 /**
  * Test Klasse um die funktion der Berechnungen zu überprüfen.
  *
- * @author Thomas
+ * @author Thomas Saner
  * @version 1.0
  */
 public class Test {
