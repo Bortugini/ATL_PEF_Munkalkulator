@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.StringJoiner;
+
 /**
  * Repräsentiert das Pulver einer Patrone.
  * Grs ist die Abkürzung für Grain amerikanische Gewichtseinheit.
@@ -27,8 +29,8 @@ public class Powder extends AmmoPart {
     private String unitAmountLoaded;
 
     /**
-     * Konstante die den Umrechnungsfaktor repräsentiert,
-     * wird für die umrechnung von grs in g benötigt.<br/>
+     * Konstante die den Umrechnungsfaktor repräsentiert.
+     * Wird für die Umrechnung von grs in g benötigt.<br/>
      * Quellen:<br />
      * <a href="https://www.translatorscafe.com/unit-converter/de-DE/mass/2-46/gram-grain/">Quelle 1 </a><br/>
      * <a href="https://de.wikipedia.org/wiki/Gran_(Einheit)">Quelle 2</a>
@@ -39,11 +41,11 @@ public class Powder extends AmmoPart {
     /**
      * Konstruktor erstellt eine neue Instanz eines Pulvers ruft den super Konstruktor aus AmmoPart auf.
      *
-     * @param name Name des Pulvers
-     * @param amountPack Menge pro Packung Pulver in g
-     * @param pricePack Preis pro Packung Pulver
-     * @param amountLoaded Verladene Menge Pulver pro Patrone
-     * @param unitPack Einheit der Verpackung kg oder g
+     * @param name             Name des Pulvers
+     * @param amountPack       Menge pro Packung Pulver in g
+     * @param pricePack        Preis pro Packung Pulver
+     * @param amountLoaded     Verladene Menge Pulver pro Patrone
+     * @param unitPack         Einheit der Verpackung kg oder g
      * @param unitAmountLoaded Einheit der verladenen Menge grs oder g
      */
     public Powder(String name, int amountPack, double pricePack, double amountLoaded, String unitPack, String unitAmountLoaded) {
@@ -55,7 +57,7 @@ public class Powder extends AmmoPart {
     }
 
     /**
-     * Diese Methode dient dazu die Einheit der Packung Zurückzuliefern.
+     * Diese Methode dient dazu, die Einheit der Packung zurückzuliefern.
      *
      * @return {@code String} mit der einheit
      */
@@ -64,7 +66,7 @@ public class Powder extends AmmoPart {
     }
 
     /**
-     * Diese Methode dient dazu die Einheit der verladenen Menge Zurückzuliefern.
+     * Diese Methode dient dazu, die Einheit der verladenen Menge zurückzuliefern.
      *
      * @return {@code String} mit der Einheit
      */
@@ -73,7 +75,7 @@ public class Powder extends AmmoPart {
     }
 
     /**
-     * Diese Methode dient dazu die verladene Menge Pulver Zurückzuliefern in grs.
+     * Diese Methode dient dazu, die verladene Menge Pulver zurückzuliefern in grs.
      *
      * @return {@code double} Verladene Menge Pulver
      */
@@ -84,13 +86,12 @@ public class Powder extends AmmoPart {
     /**
      * @return {@code String} mit allen daten in folgendem Format:<br/>
      * {@code Class:name:pricePcs:amountPack:pricePack:amountLoaded}
-     *
      * @see AmmoPart#getData()
      */
     @Override
     public String getData() {
         String data = super.getData();
-        return String.format(data + ":" + amountLoaded);
+        return data + ":" + amountLoaded + ":" + unitPack + " :" + unitAmountLoaded;
     }
 
     /**
@@ -99,8 +100,8 @@ public class Powder extends AmmoPart {
      * bei der verladenen Menge Pulver und Kilogramm in Gramm bei der Menge pro Packung um.
      * Dies ist wichtig, weil sonst die Formel für die Berechnung des Preises pro Packung nicht stimmen würde.
      *
-     * @param pricePack Preis pro Packung
-     * @param amountPack Menge pro Packung in g
+     * @param pricePack    Preis pro Packung
+     * @param amountPack   Menge pro Packung in g
      * @param amountLoaded verladene Menge in grs
      * @return {@code double} Preis pro grs
      */
@@ -118,10 +119,23 @@ public class Powder extends AmmoPart {
         //Berechnung vom Preis von einem g Pulver
         pricePack /= amountPack;
         /*
-        Erster Schritt umrechnung von g in grs
-        Zweiter Schritt Berechnung des Preises der Verladenen menge
+        Erster Schritt, umrechnung von g in grs
+        Zweiter Schritt, berechnung des Preises der verladenen Menge
         */
         pricePack = pricePack / GRAIN_FACTOR * amountLoaded;
         return pricePack;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", AmmoPart.class.getSimpleName() + "[", "]")
+                .add("name='" + super.getName() + "'")
+                .add("preisStk=" + super.getPricePcs())
+                .add("preisPackung=" + super.getPricePack())
+                .add("mengePackung=" + super.getAmountPack())
+                .add("amountLoaded=" + amountLoaded)
+                .add("unitPack='" + unitPack + "'")
+                .add("unitAmountLoaded='" + unitAmountLoaded + "'")
+                .toString();
     }
 }

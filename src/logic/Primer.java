@@ -13,10 +13,9 @@ public class Primer extends AmmoPart {
     /**
      * Konstruktor erstellt eine neue Instanz eines Zünders ruft den super Konstruktor aus AmmoPart auf.
      *
-     * @param name Name des Zündhütchen
+     * @param name       Name des Zündhütchen
      * @param amountPack Packungsinhalt
-     * @param pricePack Preis pro Packung
-     *
+     * @param pricePack  Preis pro Packung
      * @see AmmoPart
      */
     public Primer(String name, int amountPack, double pricePack) {

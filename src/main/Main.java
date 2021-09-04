@@ -6,9 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 
 /**
- * Ein Programm um Munitions Preise von selbst hergestellter Munition zu Berechnen.
+ * Ein Programm um Munitionspreise von selbst hergestellter Munition zu Berechnen.
  *
  * @author Thomas Saner
  * @version 1.0
@@ -17,13 +19,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainWindow.fxml")));
         primaryStage.setTitle("Munitions Kalkulator");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
-//TODO Javadoc nötig?
+
     public static void main(String[] args) {
         launch(args);
     }

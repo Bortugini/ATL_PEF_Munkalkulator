@@ -22,11 +22,10 @@ public class Test {
         Powder powder1 = new Powder("RS 52", 1000, 99, 2.838192258, "g", "g");
         Case case1 = new Case("Norma", 1, 0);
         Primer primer1 = new Primer("Fiocchi", 150, 6.8);
-        Cartridge cartridge1 = new Cartridge(bullet, aCase, powder, primer, "308");
+        Cartridge cartridge1 = new Cartridge(bullet, aCase, powder, primer, "308 2");
 
         System.out.println("Berechnung Test2 " + isEqual(cartridge1));
 
-        System.out.println(cartridge);
     }
 
     /**

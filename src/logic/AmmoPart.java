@@ -32,8 +32,8 @@ public abstract class AmmoPart {
     /**
      * Konstruktor erstellt eine neue Instanz für ein Munitions-Teil.
      *
-     * @param name Name des Munitions-Teiles
-     * @param pricePack Preis pro Packung
+     * @param name       Name des Munitions-Teiles
+     * @param pricePack  Preis pro Packung
      * @param amountPack Menge pro Packung
      */
     public AmmoPart(String name, int amountPack, double pricePack) {
@@ -91,15 +91,6 @@ public abstract class AmmoPart {
     }
 
     /**
-     * Diese Methode dient dazu den Preis für ein ganzes Pack an Teilen Zurückzuliefern.
-     *
-     * @return {@code double} Preis pro Packung.
-     */
-    public double getPricePack() {
-        return pricePack;
-    }
-
-    /**
      * Diese Methode dient dazu den Parameter {@code amountPack} (Menge pro Packung) zu ändern.
      * Es sind sämtliche {@code int} erlaubt ausser 0.
      *
@@ -110,6 +101,15 @@ public abstract class AmmoPart {
     }
 
     /**
+     * Diese Methode dient dazu den Preis für ein ganzes Pack an Teilen Zurückzuliefern.
+     *
+     * @return {@code double} Preis pro Packung.
+     */
+    public double getPricePack() {
+        return pricePack;
+    }
+
+    /**
      * Diese Methode dient dazu alle Parameter des Objektes als {@code String} Zurückzuliefern.
      * In folgendem Format:<br/>
      * {@code Class:name:pricePcs:amountPack:pricePack}
@@ -117,8 +117,8 @@ public abstract class AmmoPart {
      * @return {@code String} Format: {@code Class:name:pricePcs:amountPack:pricePack}
      */
     public String getData() {
-        return String.format(getClass().getSimpleName() + ":" + name + ":" + pricePcs + ":"
-                + amountPack + ":" + pricePack);
+        return getClass().getSimpleName() + ":" + name + ":" + pricePcs + ":"
+                + amountPack + ":" + pricePack;
     }
 
     /**

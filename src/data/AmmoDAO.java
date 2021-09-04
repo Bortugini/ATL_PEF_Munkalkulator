@@ -7,12 +7,11 @@ import java.util.ArrayList;
 /**
  * Interface um {@code Cartridge} zu Speichern.
  * Dieses Interface muss implementiert werden,
- * um eine neue variante um Patronen zu Speichern zur verfügung zu stellen.
- *
- * @see Cartridge
+ * um eine neue Variante um Patronen zu Speichern zur verfügung zu stellen.
  *
  * @author Thomas Saner
  * @version 1.0
+ * @see Cartridge
  */
 public interface AmmoDAO {
 
@@ -21,7 +20,7 @@ public interface AmmoDAO {
      *
      * @return {@code Cartridge} als ArrayList
      */
-    ArrayList<Cartridge> getCartridge();
+    ArrayList<Cartridge> getCartridges();
 
     /**
      * Implementierung um {@code Cartridge} zu Speichern.
@@ -29,5 +28,18 @@ public interface AmmoDAO {
      * @param cartridge Patronen Objekt
      * @see Cartridge
      */
-    void save(Cartridge cartridge);
+    void addCartridge(Cartridge cartridge);
+
+    /**
+     * Implementierung um eine ArrayList mit {@code Cartridge} zu Speichern.
+     *
+     * @param cartridges ArrayList mit {@code Cartridge}
+     */
+    void addCartridges(ArrayList<Cartridge> cartridges);
+
+    /**
+     * Implementierung um die ArrayList zu Leeren.
+     */
+    void clear();
 }
+

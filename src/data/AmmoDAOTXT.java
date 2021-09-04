@@ -1,54 +1,108 @@
 package data;
 
-import logic.Cartridge;
+import logic.*;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
- * Implementation um Munitions-Teile als TXT Datei zu Speichert und zu Laden.
+ * Implementation um Munitions-Teile als TXT Datei zu Speichern und zu Laden.
  *
  * @author Thomas Saner
  * @version 1.0
  */
 public class AmmoDAOTXT implements AmmoDAO {
+    /**
+     * Speicher Path für die Datei.
+     */
+    private final String PATH = System.getProperty("user.dir") + "\\src\\data\\ammoPart.txt";
 
     /**
-     * @see AmmoDAO
+     * @see AmmoDAO#getCartridges()
      */
-    private final ArrayList<Cartridge> cartridges = new ArrayList<>();
+    public ArrayList<Cartridge> getCartridges() {
+        ArrayList<Cartridge> cartridges = new ArrayList<>();
+        String name = null;
+        String[] data;
+        Bullet bullet = null;
+        Case aCase = null;
+        Powder powder = null;
+        Primer primer = null;
+        Cartridge cartridge = null;
 
-    /**
-     * @see AmmoDAO#getCartridge()
-     */
-    public ArrayList<Cartridge> getCartridge() {
-        //TODO aus TXT Laden Implementieren
+        try (Scanner in = new Scanner(new File(PATH))) {
+            while (in.hasNext()) {
+                data = in.nextLine().split(":");
+                switch (data[0]) {
+                    case "Bullet":
+                        bullet = new Bullet(data[1], Integer.parseInt(data[3]), Double.parseDouble(data[4]));
+                        break;
+                    case "Case":
+                        aCase = new Case(data[1], Integer.parseInt(data[3]), Double.parseDouble(data[4]));
+                        break;
+                    case "Powder":
+                        powder = new Powder(data[1], Integer.parseInt(data[3]), Double.parseDouble(data[4]),
+                                Double.parseDouble(data[5]), data[6], data[7]);
+                        break;
+                    case "Primer":
+                        primer = new Primer(data[1], Integer.parseInt(data[3]), Double.parseDouble(data[4]));
+                        cartridge = new Cartridge(bullet, aCase, powder, primer, name);
+                        cartridges.add(cartridge);
+                        break;
+                    case "Name":
+                        name = data[1];
+                        break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         return cartridges;
     }
 
+
     /**
-     * @see AmmoDAO#save(Cartridge)
+     * @see AmmoDAO#addCartridge(Cartridge)
      */
     @Override
-    public void save(Cartridge cartridge) {
-        //TODO File auslesen daten in string speichern und datei speichern toString methode verwenden
-        PrintWriter pWriter = null;
-        try {
-            pWriter = new PrintWriter(new BufferedWriter(new FileWriter("D:\\Programirung\\InteliJ\\ATL_PEF_Munkalkulator\\src\\data\\ammoPart.txt")));
-            pWriter.println(cartridge.getBullet().getData());
-            pWriter.println(cartridge.getCase().getData());
-            pWriter.println(cartridge.getPowder().getData());
-            pWriter.println(cartridge.getPrimer().getData());
+    public void addCartridge(Cartridge cartridge) {
+        try (FileWriter fileWriter = new FileWriter(PATH, true);
+             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+             PrintWriter out = new PrintWriter(bufferedWriter)) {
+            out.println("Name:" + cartridge.getNameCartridge());
+            out.println(cartridge.getBullet().getData());
+            out.println(cartridge.getCase().getData());
+            out.println(cartridge.getPowder().getData());
+            out.println(cartridge.getPrimer().getData());
         } catch (IOException ioe) {
             ioe.printStackTrace();
-        } finally {
-            if (pWriter != null) {
-                pWriter.flush();
-                pWriter.close();
-            }
+        }
+
+    }
+
+    /**
+     * @see AmmoDAO#addCartridges(ArrayList)
+     */
+    @Override
+    public void addCartridges(ArrayList<Cartridge> cartridges) {
+        for (Cartridge cartridge : cartridges) {
+            addCartridge(cartridge);
+        }
+
+    }
+
+    /**
+     * @see AmmoDAO#clear()
+     */
+    @Override
+    public void clear() {
+        try (FileWriter fileWriter = new FileWriter(PATH, false);
+             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+             PrintWriter out = new PrintWriter(bufferedWriter)) {
+            out.write("");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
         }
     }
 }

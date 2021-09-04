@@ -18,18 +18,34 @@ public class AmmoDAOMemory implements AmmoDAO {
     private final ArrayList<Cartridge> cartridges = new ArrayList<>();
 
     /**
-     * @see AmmoDAO#getCartridge()
+     * @see AmmoDAO#getCartridges()
      */
     @Override
-    public ArrayList<Cartridge> getCartridge() {
+    public ArrayList<Cartridge> getCartridges() {
         return cartridges;
     }
 
     /**
-     * @see AmmoDAO#save(Cartridge)
+     * @see AmmoDAO#addCartridge(Cartridge)
      */
     @Override
-    public void save(Cartridge cartridge) {
-        cartridges.add(cartridge);
+    public void addCartridge(Cartridge cartridge) {
+        this.cartridges.add(cartridge);
+    }
+
+    /**
+     * @see AmmoDAO#addCartridges(ArrayList)
+     */
+    @Override
+    public void addCartridges(ArrayList<Cartridge> cartridges) {
+        this.cartridges.addAll(cartridges);
+    }
+
+    /**
+     * @see AmmoDAO#clear()
+     */
+    @Override
+    public void clear() {
+        cartridges.clear();
     }
 }

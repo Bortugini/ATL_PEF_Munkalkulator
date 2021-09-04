@@ -1,17 +1,18 @@
 package logic;
 
+import java.util.StringJoiner;
+
 /**
  * Repräsentiert eine Patrone.
  * Eine Patrone besteht aus einem Geschoss {@code Bullet}, einer Hülse {@code Case},
  * Pulver {@code Powder}, einem Zündhütchen {@code Primer}, und einem Namen {@code String}.
  *
+ * @author Thomas Saner
+ * @version 1.0
  * @see Bullet
  * @see Case
  * @see Powder
  * @see Primer
- *
- * @author Thomas Saner
- * @version 1.0
  */
 public class Cartridge {
 
@@ -39,12 +40,11 @@ public class Cartridge {
     /**
      * Konstruktor erstellt eine neue Instanz für eine Patrone.
      *
-     * @param bullet Bullet Objekt
-     * @param aCase Case Objekt
-     * @param powder Powder Objekt
-     * @param primer Primer Objekt
+     * @param bullet        Bullet Objekt
+     * @param aCase         Case Objekt
+     * @param powder        Powder Objekt
+     * @param primer        Primer Objekt
      * @param nameCartridge Name der Patrone
-     *
      * @see Bullet
      * @see Case
      * @see Powder
@@ -59,7 +59,7 @@ public class Cartridge {
     }
 
     /**
-     * Diese Methode dient dazu den Namen der Patrone Zurückzuliefern.
+     * Diese Methode dient dazu, den Namen der Patrone zurückzuliefern.
      *
      * @return {@code String} Name
      */
@@ -68,7 +68,7 @@ public class Cartridge {
     }
 
     /**
-     * Diese Methode dient dazu das {@code Bullet} Objekt Zurückzuliefern.
+     * Diese Methode dient dazu, dass {@code Bullet} Objekt zurückzuliefern.
      *
      * @return {@code Bullet} Objekt
      * @see Bullet
@@ -78,7 +78,7 @@ public class Cartridge {
     }
 
     /**
-     * Diese Methode dient dazu das {@code Case} Objekt Zurückzuliefern.
+     * Diese Methode dient dazu, dass {@code Case} Objekt zurückzuliefern.
      *
      * @return {@code Case} Objekt
      */
@@ -87,7 +87,7 @@ public class Cartridge {
     }
 
     /**
-     * Diese Methode dient dazu das {@code Powder} Objekt Zurückzuliefern.
+     * Diese Methode dient dazu, dass {@code Powder} Objekt zurückzuliefern.
      *
      * @return {@code Powder} Objekt
      */
@@ -96,7 +96,7 @@ public class Cartridge {
     }
 
     /**
-     * Diese Methode dient dazu das {@code Primer} Objekt Zurückzuliefern.
+     * Diese Methode dient dazu, dass {@code Primer} Objekt zurückzuliefern.
      *
      * @return {@code Primer} Objekt
      */
@@ -105,7 +105,7 @@ public class Cartridge {
     }
 
     /**
-     * Diese Methode dient dazu den Preis für die Anzahl Patronen zu berechnen und liefert diesen zurück.
+     * Diese Methode dient dazu, den Preis für die Anzahl Patronen zu berechnen und liefert diesen zurück.
      *
      * @param quantity Anzahl Patronen
      * @return {@code double} Preis für anzahl Patronen
@@ -117,19 +117,18 @@ public class Cartridge {
     }
 
     /**
-     * Diese Methode dient dazu eine {@code String} Representation des Objektes Zurückliefern.
+     * Diese Methode dient dazu, eine {@code String} Representation des Objektes Zurückliefern.
      *
      * @return {@code String} Representation des Objektes
      */
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Cartridge{");
-        sb.append("bullet=").append(bullet);
-        sb.append(", aCase=").append(aCase);
-        sb.append(", powder=").append(powder);
-        sb.append(", primer=").append(primer);
-        sb.append(", nameCartridge='").append(nameCartridge).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return new StringJoiner(", ", Cartridge.class.getSimpleName() + "[", "]")
+                .add("bullet=" + bullet)
+                .add("aCase=" + aCase)
+                .add("powder=" + powder)
+                .add("primer=" + primer)
+                .add("nameCartridge='" + nameCartridge + "'")
+                .toString();
     }
 }
